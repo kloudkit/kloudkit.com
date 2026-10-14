@@ -19,7 +19,7 @@ const all = ['landing', ...sites]
 const shared = [/^theme\//, /^package(-lock)?\.json$/, /^\.github\/workflows\//]
 
 // Files the landing page is built from, besides landing/ itself.
-const landing = [/^landing\//, /^theme\/tokens\.css$/, /^scripts\/build-landing\.mjs$/, /^package(-lock)?\.json$/]
+const landing = [/^landing\//, /^brand\//, /^theme\/tokens\.css$/, /^scripts\/build-landing\.mjs$/, /^package(-lock)?\.json$/]
 
 function changedFiles() {
   if (!base || /^0+$/.test(base)) return null
