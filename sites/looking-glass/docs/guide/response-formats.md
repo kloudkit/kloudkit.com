@@ -45,6 +45,8 @@ query and the headers as tables, and the body.
 Empty sections are left out.
 The page title is the method and path, so browser tabs tell requests apart.
 
+![The HTML view of a GitHub push webhook: the request line, its query, headers and JSON body](/screenshots/html-view.webp)
+
 ### Copy As
 
 The **Copy as** control in the corner copies the request to your clipboard:

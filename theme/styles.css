@@ -145,6 +145,8 @@ aside.VPSidebar,
 
 .vp-doc p img {
   margin: 0 auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
 }
 
 .vp-doc table {

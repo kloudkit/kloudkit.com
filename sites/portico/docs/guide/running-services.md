@@ -66,6 +66,8 @@ portico restart api
 its output.
 It needs a terminal, and can't be combined with `--raw`.
 
+![The dashboard: web, api and worker running, with their routes and interleaved output](/screenshots/dashboard.webp)
+
 | Key                | Action                                  |
 | ------------------ | --------------------------------------- |
 | `↑` / `k`, `↓` / `j` | Pick a service.                       |
