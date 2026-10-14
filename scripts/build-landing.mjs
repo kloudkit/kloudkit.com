@@ -52,4 +52,3 @@ for (const [pkg, family, weight] of fonts) {
 await writeFile(join(out, 'fonts.css'), faces.join('\n\n') + '\n')
 
 console.log(`landing → ${out}`)
-
