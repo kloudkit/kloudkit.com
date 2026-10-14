@@ -5,17 +5,18 @@ description: "Every Looking Glass setting, as a flag or an environment variable,
 # Configuration
 
 Every setting has a flag and an environment variable; the flag wins.
-`looking-glass --help` lists them, and `looking-glass --version` prints the version.
+`looking-glass --help` lists them, and `looking-glass --version` prints the version
+*(`dev` for a build without a release tag)*.
 
 ## Settings
 
-| Flag           | Variable         | Default   | Description                                     |
-| -------------- | ---------------- | --------- | ----------------------------------------------- |
-| `-p`, `--port` | `PORT`           | `8080`    | Port to listen on, on every interface.          |
-| `--max-body`   | `MAX_BODY_BYTES` | `1048576` | Body bytes reflected before the body is cut off. |
+| Flag                | Variable         | Default   | Description                                      |
+| ------------------- | ---------------- | --------- | ------------------------------------------------ |
+| `-p`, `--port PORT` | `PORT`           | `8080`    | Port to listen on, on every interface.           |
+| `--max-body BYTES`  | `MAX_BODY_BYTES` | `1048576` | Body bytes reflected before the body is cut off. |
 
 `--max-body` must be positive.
-An invalid `MAX_BODY_BYTES` is ignored, and the default applies.
+A `MAX_BODY_BYTES` that isn't a positive number is ignored, and the default applies.
 
 ```sh
 docker run --rm -p 9000:9000 -e PORT=9000 -e MAX_BODY_BYTES=65536 \

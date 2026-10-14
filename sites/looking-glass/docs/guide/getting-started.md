@@ -10,7 +10,7 @@ Point a webhook, a proxy or a client at it to see what it really sends.
 
 ## At a Glance
 
-- Docker, on `amd64` or `arm64`, or Go to run it without a container.
+- Docker, on `amd64` or `arm64`, or Go 1.27.2 or later to run it without a container.
 - A free port; the examples use `8080`.
 
 ## Run It

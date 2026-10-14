@@ -40,7 +40,7 @@ host to match any subdomain.
 | `tag`     | `image`   | Image tag.                                                                 |
 | `compose` | `compose` | Compose file to bring up, relative to `portico.yaml`.                      |
 | `service` | `compose` | The single compose service to start and route.                             |
-| `routes`  | `compose` | Paths for individual compose services; not with `service`.                 |
+| `routes`  | `compose` | Paths for individual compose services; not with `service`. Each starts with `/`. |
 | `port`    | all       | The port it listens on; `none` for a `run` service that serves nothing.    |
 | `route`   | all       | Path to mount it at *(default: `/<name>`)*. Must start with `/`.           |
 | `strip`   | all       | Remove the route prefix before forwarding *(default: `true`)*.             |
@@ -56,4 +56,6 @@ start yourself.
 - `port` is required for `image` services and for services you start yourself.
 - `port: none` is only valid with `run`, and a service without a port can't have a `route`.
 - With `compose`, `port` needs `service`, and must be a port that compose service publishes.
-- Service names use `a-z`, `0-9`, `_`, `.` and `-`, and can't be `portico` or `nginx`.
+- A key outside its kinds is an error, such as `dir` on an `image` service.
+- Service names start with a letter or digit, use `a-z`, `0-9`, `_`, `.` and `-`, and can't
+  be `portico` or `nginx`.

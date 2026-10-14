@@ -31,7 +31,7 @@ Markers are imported from `kloudkit.testshed.docker.decorators` when you apply t
 | `shed_state`              | session  | The session's resolved settings: image, tag, network, labels and paths.     |
 | `test_root`               | session  | The tests directory, as an absolute path *(`--shed-tests-dir`)*.            |
 | `project_root`            | session  | The source directory, as an absolute path *(`--shed-src-dir`)*.             |
-| `downloader`              | function | `downloader(url, filename)`: downloads into `tmp_path`, returns the `Path`. |
+| `downloader`              | function | `downloader(url, output)`: downloads into `tmp_path`, returns the `Path`.   |
 
 `downloader` also takes `method`, `allow_redirects`, `raise_for_status` and
 `request_options` *(passed to `requests`)*.
@@ -46,6 +46,8 @@ Markers are imported from `kloudkit.testshed.docker.decorators` when you apply t
 | `probe`           | A readiness probe to wait for; `None` for none.                            |
 | `timeout`         | Seconds to wait for the probe, keeping its other fields *(not on sidecars)*. |
 | `container_class` | The `Container` subclass to wrap the container in.                         |
+| `volumes`         | `(source, dest)` tuples or volume objects, mounted read-only.              |
+| `networks`        | Networks to join instead of the session's network.                         |
 | `detach`          | `False` runs the container to completion and returns its output *(sidecars only)*. |
 
 ## Markers

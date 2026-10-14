@@ -25,8 +25,9 @@ portico up --tui            # live dashboard
 portico up --watch          # reload when portico.yaml changes
 ```
 
+Naming services starts only those; the rest keep their routes and answer `503`.
 Services you start yourself *(those with only a `port`)* are routed, but never started, so
-they can't be named in `portico up web api`.
+they can't be named.
 
 When a service's port is already taken, Portico warns that another process may answer its
 route.
@@ -36,9 +37,9 @@ route.
 Every line a service prints shows up prefixed with its name.
 These flags change what you see:
 
-- **`--hide service`:** keep a service's output off the screen *(it's still logged)*.
+- **`--hide web,api`:** keep these services' output off the screen *(it's still logged)*.
 - **`--timestamps`:** prefix every line with the time.
-- **`--raw`:** print output without prefixes or colors.
+- **`--raw`:** print output without prefixes or colors, and Portico's own lines to stderr.
 - **`--no-logs`:** don't write log files.
 
 Each service's output is also written to `.portico/logs/<name>.log`, without colors.
@@ -77,12 +78,12 @@ It needs a terminal, and can't be combined with `--raw`.
 
 ## Reload on Changes
 
-`portico up --watch` reloads when `portico.yaml` changes.
+`portico up --watch` reloads when `portico.yaml` changes, so it needs a config file.
 Only the services whose entries changed restart, and the others keep their ports.
 An invalid file is reported and ignored until it's fixed.
 
-Changes to `proxy` or `runtime` need a full restart; `--watch` says so instead of applying
-them.
+Changes to `proxy` or `runtime` need a full restart.
+`--watch` warns about them, and applies nothing more until they're undone or Portico restarts.
 
 ## Control a Running Portico
 

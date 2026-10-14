@@ -41,7 +41,8 @@ http://localhost:8080/api/users?page=2&format=json
 ## The HTML View
 
 The HTML view shows the request line, the time, the client address and the host, then the
-query, the headers and the body as tables.
+query and the headers as tables, and the body.
+Empty sections are left out.
 The page title is the method and path, so browser tabs tell requests apart.
 
 ### Copy As

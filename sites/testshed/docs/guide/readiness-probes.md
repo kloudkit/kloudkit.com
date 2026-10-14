@@ -29,9 +29,12 @@ ShellProbe(command="pg_isready -U postgres", timeout=30.0)
 ```
 
 - **`HttpProbe`:** runs `curl http://localhost:<port><endpoint>` inside the container.
-  Set `command` to use another client *(`command="wget -qO-"`)*, or `host` for another address.
+  Any HTTP status counts; use `command="curl -f"` to require a success status.
+  Set `command` to use another client *(`command="wget -qO-"`)*, or `host` for another address
+  *(with its scheme, `http://localhost` by default)*.
 - **`LogProbe`:** searches the container's logs for `pattern`.
-- **`ShellProbe`:** runs `command`, split on spaces and run without a shell.
+- **`ShellProbe`:** runs `command` *(a string or a list)* through the container's shell, like
+  `execute`.
 
 Each probe retries every 100 ms, for up to `timeout` seconds *(30 by default)*.
 
@@ -77,6 +80,32 @@ To wait longer without restating the probe, pass only `timeout`:
 def test_slow_boot(shed):
   ...
 ```
+
+## Write Your Own
+
+Subclass `Probe` with a `check` that raises until the container is ready, and a
+`failure_message` for the timeout:
+
+```python
+from dataclasses import dataclass
+
+from kloudkit.testshed.docker import Probe
+
+@dataclass(slots=True)
+class FileProbe(Probe):
+  path: str = "/tmp/ready"
+
+  def check(self, container):
+    if not container.fs.exists(self.path):
+      raise FileNotFoundError(self.path)
+
+  @property
+  def failure_message(self):
+    return f"{self.path} did not appear within {self.timeout}s"
+```
+
+Run commands in `check` with `raises=True`: without it, the first failed attempt fails the
+test instead of retrying.
 
 ## When a Probe Times Out
 

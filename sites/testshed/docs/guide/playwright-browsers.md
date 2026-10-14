@@ -11,7 +11,8 @@ Nothing but the Playwright Python package is needed on the host.
 ## At a Glance
 
 - TestShed enabled with `--shed`.
-- Docker can pull `mcr.microsoft.com/playwright`.
+- Docker can pull `mcr.microsoft.com/playwright`, and the container can reach the npm
+  registry *(it starts the server with `npx playwright run-server`)*.
 
 ## Drive the Browser
 

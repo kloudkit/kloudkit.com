@@ -57,6 +57,8 @@ works there *(`publish`, `command`, `entrypoint`, `user`, `networks`, …)*.
 
 Markers work on a class or a module too *(`pytestmark`)*.
 The one closest to the test wins: a marker on a test replaces the same marker on its class.
+Each marker applies once per test, so two `@shed_env` on one test keep only one, and
+`@shed_mutable()` counts as an `@shed_env`.
 
 ### Volumes
 
@@ -100,12 +102,13 @@ class AppContainer(Container):
 def shed_container_defaults():
   return {
     "container_class": AppContainer,
-    "envs": {"APP_PORT": 3000},
     "probe": HttpProbe(port=3000, endpoint="/health"),
   }
 ```
 
-Markers are applied on top of the defaults.
+Markers are applied on top of the defaults, key by key.
+`envs` and `volumes` are the exception: a dedicated container takes them from its markers
+alone, so default `envs` and `volumes` reach only the shared container.
 `container_class` picks the class every container is wrapped in *(see
 [Inside a Container](./inside-a-container#custom-container-classes))*.
 
@@ -166,7 +169,8 @@ def test_with_nginx(docker_sidecar):
   assert nginx.ip()
 ```
 
-It takes the same arguments as `@shed_config`, plus `probe` and `container_class`.
+It takes the same arguments as `@shed_config` except `timeout`, and ignores
+`shed_container_defaults`.
 The container is removed when the test ends; `docker_module_sidecar` and
 `docker_session_sidecar` keep it for the module or the session.
 With `detach=False`, the container runs to completion and the call returns its output.

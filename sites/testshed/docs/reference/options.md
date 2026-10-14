@@ -5,7 +5,8 @@ description: "Every TestShed command-line option, with its default."
 # Command-Line Options
 
 Every option TestShed adds to pytest.
-Paths are relative to the directory of your pytest config file.
+Paths are relative to the directory of your pytest config file, except
+`--shed-build-context`, which is relative to the current directory.
 
 | Option                       | Default                                 | Description                                                         |
 | ---------------------------- | --------------------------------------- | ------------------------------------------------------------------- |

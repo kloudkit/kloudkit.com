@@ -4,13 +4,14 @@ description: "Read Looking Glass's activity log: one colored line per request, w
 
 # Activity Log
 
-Looking Glass prints one line per request to its output, so `docker logs` reads like an
-access log.
+Looking Glass prints one line per request to stderr, so `docker logs` reads like an access
+log.
 The line never includes headers or bodies, so secrets in requests don't end up in your logs.
 
 ## At a Glance
 
-- Looking Glass running in a container, or in a terminal.
+- Looking Glass running *(see [Getting Started](./getting-started))*.
+- Access to its output: `docker logs`, or the terminal it runs in.
 
 ## Read the Log
 
@@ -26,7 +27,12 @@ Each line has the time, the client address, the method, the path, the format of 
 response and the size of the reflected body.
 A body that was cut off shows a `+` after its size *(`1048576b+`)*.
 
-On a terminal, the request side is lavender and the response side yellow, as in the logo.
+The request side is lavender and the response side yellow, as in the logo.
+The colors are always written, so a log collector stores the ANSI escape codes along with the
+text.
+
+Looking Glass also logs one line when it starts, with its port and body limit, and
+`shutting down` when it stops.
 
 ## Safe to Log
 

@@ -22,6 +22,9 @@ pytest --shed --shed-image=ghcr.io/acme/app --shed-tag=pr-563
 pytest --shed --shed-image=ghcr.io/acme/app --shed-tag=sha256:9f86d0…
 ```
 
+`--shed-image` can't contain `:` or `@`, so a registry with a port *(`localhost:5000/app`)*
+is rejected too.
+
 The `shed_tag` fixture holds the result *(`ghcr.io/acme/app:pr-563`, or
 `ghcr.io/acme/app@sha256:…`)*, for tests that start their own containers from the same image.
 
@@ -55,7 +58,8 @@ pytest --shed --shed-image=my-test-image --shed-image-policy=build \
   --shed-build-context=docker --shed-dockerfile=Dockerfile.tests
 ```
 
-`--shed-dockerfile` is relative to the build context.
+`--shed-build-context` is relative to the current directory, and `--shed-dockerfile` to the
+build context.
 
 ## Skipping Docker
 

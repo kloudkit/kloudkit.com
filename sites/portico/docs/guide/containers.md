@@ -29,6 +29,7 @@ through Portico.
 Without `tag`, the runtime uses its default *(`latest`)*.
 
 The container is named `portico-<project>-<service>` and removed when it stops.
+`<project>` is a short hash of the directory `portico.yaml` is in.
 
 ## Compose Files
 
@@ -58,10 +59,8 @@ Until then, requests get a `503` with the container's state:
 Containers without a healthcheck, like every other service, are ready as soon as their port
 accepts connections.
 
-::: info
 Healthchecks hold back requests on the builtin engine only.
 The nginx engine routes to a container as soon as its port answers.
-:::
 
 ## Cleanup
 

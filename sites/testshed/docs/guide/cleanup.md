@@ -30,7 +30,7 @@ Every container carries two labels, for finding them while a session runs:
 | Label                         | Value                                              |
 | ----------------------------- | -------------------------------------------------- |
 | `com.kloudkit.testshed`       | The session, such as `testshed-app-4821`.          |
-| `com.kloudkit.testshed.test`  | The test that started it *(its pytest node ID)*.   |
+| `com.kloudkit.testshed.test`  | The test that started a `shed` container *(its pytest node ID, or `shed_default`)*. |
 
 ```sh
 docker ps --filter label=com.kloudkit.testshed

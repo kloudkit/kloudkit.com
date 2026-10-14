@@ -10,7 +10,7 @@ same helpers: `execute` runs commands, `fs` reads files and `proc` inspects proc
 ## At a Glance
 
 - A container from any TestShed fixture.
-- The image needs the tools the helpers call: a shell, `test`, `ls`, `stat` and `grep`.
+- The image needs the tools the helpers call: a shell, `test`, `ls`, `stat`, `grep` and `tr`.
 
 ## Run Commands With `execute`
 
@@ -31,7 +31,9 @@ def test_commands(shed):
   assert shed.execute("whoami", user="nobody") == "nobody"
 ```
 
-A list is joined with spaces before it reaches the shell.
+A list is joined with spaces, unquoted, before it reaches the shell.
+`login_shell=True` runs it in a login shell, and other keyword arguments *(`envs`, `workdir`,
+…)* go to python-on-whales' `execute`.
 
 ### When a Command Fails
 
@@ -90,6 +92,7 @@ The kernel cuts process names at 15 characters, so look up a long name by its fi
 
 - **`ip()`:** the container's address on the session's network.
 - **`whoami()`:** the user commands run as.
+- **`wrapped`:** the underlying python-on-whales container, with its exact type.
 - **`name`, `id`, `logs()`, …:** anything else is passed to the underlying
   [python-on-whales](https://gabrieldemarmiesse.github.io/python-on-whales/) container.
 

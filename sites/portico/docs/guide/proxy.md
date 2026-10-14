@@ -82,11 +82,8 @@ With `--watch`, it rewrites the config and reloads nginx on changes.
 
 Whatever nginx can't serve, a missing route or a service that's down, it passes to Portico,
 so error responses look the same on both engines.
-
-::: info
-On the nginx engine, a container with a healthcheck gets requests as soon as its port
-answers, without waiting to be healthy.
-:::
+Only healthchecks differ: nginx sends requests to a container as soon as its port answers,
+without waiting for it to be healthy.
 
 ## Next Steps
 
