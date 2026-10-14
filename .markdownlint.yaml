@@ -1,0 +1,30 @@
+---
+default: true
+
+MD004:
+  style: dash
+
+MD013:
+  line_length: 120
+  heading_line_length: 120
+  code_blocks: false
+  tables: false
+
+MD024:
+  siblings_only: true
+
+MD033:
+  allowed_elements:
+    - br
+    - Badge
+    - kbd
+    - pre
+    - script
+
+MD034: false
+
+MD049:
+  style: asterisk
+
+MD060:
+  style: padded

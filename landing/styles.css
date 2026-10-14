@@ -1,0 +1,392 @@
+/* KloudKIT — landing page. Palette and fonts come from tokens.css. */
+
+:root {
+  /* The landing page's own face; the docs keep Fira Sans from tokens.css. */
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  /* Full-screen when it fits; scrolls on short or narrow screens. */
+  min-height: 100%;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
+
+  background-color: var(--base);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Backdrop ─────────────────────────────────────────────────────────── */
+
+/* Flat ground with a still dot grid. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--base);
+  background-image: radial-gradient(circle, rgba(198, 208, 245, 0.07) 1px, transparent 1.5px);
+  background-size: 28px 28px;
+}
+
+.topbar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 2;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--blue) 25%,
+    var(--green) 25% 50%,
+    var(--lavender) 50% 75%,
+    var(--teal) 75%
+  );
+}
+
+/* ── Stage ────────────────────────────────────────────────────────────── */
+
+.stage {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  width: min(1200px, 100vw - 2.5rem);
+  padding-block: clamp(2rem, 6vmin, 3.5rem) clamp(1.5rem, 4vmin, 2.5rem);
+}
+
+/* KloudKIT as a full-width panel, styled and behaving like the tool panels. */
+.masthead {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  padding: 1.5rem 2.25rem 1.5rem 1.75rem;
+  overflow: hidden;
+  border: 1px solid var(--surface0);
+  border-radius: 16px;
+  background-color: var(--mantle);
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease;
+}
+
+/* One segment per tool, top to bottom. */
+.masthead::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 5px;
+  background: linear-gradient(
+    180deg,
+    var(--blue) 25%,
+    var(--green) 25% 50%,
+    var(--lavender) 50% 75%,
+    var(--teal) 75%
+  );
+}
+
+.masthead:hover,
+.masthead:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--lavender);
+}
+
+.masthead:focus-visible {
+  outline: 2px solid var(--lavender);
+  outline-offset: 3px;
+}
+
+.masthead__about {
+  grid-column: 2;
+  display: block;
+  margin-top: 0.9rem;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--subtext0);
+}
+
+/* One sentence per line. */
+.masthead__about > span {
+  display: block;
+}
+
+.masthead__link {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--lavender);
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 1.75rem;
+}
+
+/* Let the wordmark, tagline and about text sit on the brand's own grid. */
+.brand > span {
+  display: contents;
+}
+
+.mark {
+  /* As tall as the wordmark, tagline and about text beside it. */
+  grid-row: 1 / span 3;
+  width: 132px;
+  height: auto;
+  border-radius: 50%;
+  border: 1px solid var(--surface1);
+}
+
+.wordmark {
+  margin: 0;
+  font-size: clamp(2rem, 5vmin, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #fff;
+}
+
+.wordmark span {
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  color: var(--lavender);
+}
+
+.tagline {
+  display: block;
+  margin: 0.35rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lavender);
+}
+
+/* ── Tools ────────────────────────────────────────────────────────────── */
+
+/* Each panel takes two accents from its own logo. */
+.tool--workspace {
+  --a: var(--blue);
+  --b: #9cebcd;
+}
+
+.tool--testshed {
+  --a: var(--green);
+  --b: var(--mauve);
+}
+
+.tool--looking-glass {
+  --a: var(--lavender);
+  --b: var(--yellow);
+}
+
+.tool--portico {
+  --a: var(--teal);
+  --b: var(--peach);
+}
+
+.tools {
+  /* Wider than the hero, so four panels fit on one row. */
+  margin-top: clamp(2rem, 5vmin, 3rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+  text-align: left;
+}
+
+@media (max-width: 960px) {
+  .tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .tools {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tool__icon {
+    width: 88px;
+    height: 88px;
+  }
+
+  .tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+
+  .masthead {
+    padding: 1.1rem 1.4rem 1.1rem 1.1rem;
+  }
+
+  .brand {
+    column-gap: 1rem;
+  }
+
+  .mark {
+    grid-row: 1 / span 2;
+    width: 64px;
+  }
+
+  .masthead__about {
+    grid-column: 1 / -1;
+  }
+
+  .masthead__link {
+    display: none;
+  }
+}
+
+.tool {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  justify-items: center;
+  gap: 0.4rem;
+  padding: 2.4rem 1.5rem 1.8rem;
+  overflow: hidden;
+  border: 1px solid var(--surface0);
+  border-radius: 16px;
+  background-color: var(--mantle);
+  color: var(--text);
+  text-align: center;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease;
+}
+
+/* The tool's two colours, as a flat bar across the top. */
+.tool::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: linear-gradient(90deg, var(--a) 50%, var(--b) 50%);
+}
+
+.tool:hover,
+.tool:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--a);
+}
+
+.tool:has(.tool__main:focus-visible) {
+  outline: 2px solid var(--a);
+  outline-offset: 3px;
+}
+
+/* The name links to the docs; its ::after stretches that link over the whole card. */
+.tool__main {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.tool__main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.tool__icon {
+  width: 112px;
+  height: 112px;
+  margin-bottom: 1.1rem;
+  object-fit: contain;
+}
+
+.tool__name {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.tool__tagline {
+  max-width: 24ch;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--subtext0);
+  text-wrap: balance;
+}
+
+.tool__links {
+  margin-top: 1.4rem;
+  display: flex;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Above the stretched docs link, so each stays clickable on its own.
+   Each link takes the colour of the bar half above it: docs left, GitHub right. */
+.tool__links a {
+  position: relative;
+  z-index: 1;
+  color: var(--a);
+  text-decoration: none;
+}
+
+.tool__links a + a {
+  color: var(--b);
+}
+
+.tool__links a:hover,
+.tool__links a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+
+.footer {
+  position: relative;
+  z-index: 1;
+  padding-block: 1rem calc(1.5rem + env(safe-area-inset-bottom));
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--surface2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .masthead,
+  .tool {
+    transition: none;
+  }
+
+  .masthead:hover,
+  .tool:hover {
+    transform: none;
+  }
+}

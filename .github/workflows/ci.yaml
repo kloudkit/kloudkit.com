@@ -1,0 +1,130 @@
+---
+name: 🌐 Sites CI
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: Targets to build, as a JSON array (empty builds all)
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  actions: read
+  deployments: write
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: 🧹 Lint
+    runs-on: ubuntu-latest
+    if: github.actor != 'renovate[bot]'
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v7
+
+      - uses: pre-commit/action@v3.0.1
+
+  changes:
+    name: 🔍 Detect changes
+    runs-on: ubuntu-latest
+
+    outputs:
+      targets: ${{ steps.targets.outputs.targets }}
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # Diff against the last successful run on this branch, not the previous push:
+      # a cancelled or failed run would otherwise drop its changes for good.
+      - name: 🎯 Resolve targets
+        id: targets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.ref_name }}
+          INPUT: ${{ inputs.targets }}
+        run: |
+          if [ -n "$INPUT" ]; then
+            echo "targets=$INPUT" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          BASE=$(gh run list --workflow ci.yaml --branch "$BRANCH" --status success \
+            --limit 1 --json headSha --jq '.[0].headSha // ""')
+
+          echo "targets=$(node scripts/changed-targets.mjs "$BASE")" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: 📚 Build (${{ matrix.target }})
+    runs-on: ubuntu-latest
+    # Lint is skipped for Renovate; a skipped need must not skip the build.
+    if: >-
+      !cancelled()
+      && needs.changes.result == 'success'
+      && needs.lint.result != 'failure'
+      && needs.changes.outputs.targets != '[]'
+    needs:
+      - lint
+      - changes
+
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ${{ fromJson(needs.changes.outputs.targets) }}
+
+    # The Cloudflare Pages project: landing → kloudkit-com, every docs site → <id>-docs.
+    env:
+      PROJECT: >-
+        ${{ matrix.target == 'landing' && 'kloudkit-com' || format('{0}-docs', matrix.target) }}
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: 🔵 Setup NodeJS
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: ⏬ Install Dependencies
+        run: npm ci
+
+      - name: 👷‍♂️ Build
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          if [ "$TARGET" = landing ]; then
+            npm run build:landing
+          else
+            npx vitepress build "sites/$TARGET"
+          fi
+
+      - name: 🔼 Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ matrix.target }}
+          path: dist/${{ matrix.target }}
+
+      - name: ⛅ Deploy to Cloudflare
+        if: github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@v4
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: >-
+            pages deploy dist/${{ matrix.target }}
+            --project-name=${{ env.PROJECT }}
+            --branch=main

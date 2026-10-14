@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vitepress/cache/
+.wrangler/
+.dev.vars
+.DS_Store
+
+CLAUDE.md
+.claude/settings.local.json

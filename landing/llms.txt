@@ -1,0 +1,14 @@
+# KloudKIT
+
+> Open-source developer tools that take the friction out of everyday development. Each tool has its own documentation site with an llms.txt index.
+
+## Tools
+
+- [Kloud Workspace](https://ws.kloudkit.com/llms.txt): A batteries-included, pre-configured development workspace inside a Docker container.
+- [TestShed](https://testshed.kloudkit.com/llms.txt): A pytest plugin that hands your tests real Docker containers and Playwright browsers as fixtures.
+- [Looking Glass](https://lookingglass.kloudkit.com/llms.txt): A drop-in HTTP request reflector that answers every request with exactly what arrived.
+- [Portico](https://portico.kloudkit.com/llms.txt): Runs every service of a web app and puts one origin in front of them: one port, no CORS.
+
+## Source
+
+- [GitHub](https://github.com/kloudkit): Every tool's source code and issue tracker.

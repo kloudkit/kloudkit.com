@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":disableRateLimiting"
+  ],
+  "assignees": [ "bdsoha" ],
+  "labels": [ "type: dependency 🔼" ],
+  "schedule": [ "every weekend" ],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "🤖 Renovate Dashboard",
+  "commitMessageAction": "🔼 Bump"
+}

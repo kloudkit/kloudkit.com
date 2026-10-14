@@ -1,0 +1,22 @@
+{
+  "name": "kloudkit.com",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:landing": "node scripts/build-landing.mjs",
+    "dev:landing": "npm run build:landing && npx wrangler pages dev dist/landing"
+  },
+  "devDependencies": {
+    "@catppuccin/vitepress": "^0.1.2",
+    "@fontsource-variable/comfortaa": "^5.3.0",
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource-variable/outfit": "^5.3.0",
+    "@fontsource/fira-code": "^5.3.0",
+    "@fontsource/fira-sans": "^5.3.0",
+    "@fontsource/nunito-sans": "^5.3.0",
+    "@fontsource/victor-mono": "^5.3.0",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-llms": "^1.14.0",
+    "vue": "^3.5.44"
+  }
+}

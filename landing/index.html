@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>KloudKIT • Your KIT to the cloud</title>
+    <meta
+      name="description"
+      content="Open-source developer toolkits for cloud-native work: Kloud Workspace, TestShed, Looking Glass and Portico."
+    />
+
+    <meta name="theme-color" content="#303446" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://kloudkit.com/" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="KloudKIT" />
+    <meta property="og:title" content="KloudKIT • Your KIT to the cloud" />
+    <meta
+      property="og:description"
+      content="Open-source developer toolkits for cloud-native work: Kloud Workspace, TestShed, Looking Glass and Portico."
+    />
+    <meta property="og:url" content="https://kloudkit.com/" />
+    <meta property="og:image" content="https://kloudkit.com/og.png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta
+      property="og:image:alt"
+      content="KloudKIT: Kloud Workspace, TestShed, Looking Glass and Portico"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://kloudkit.com/og.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://kloudkit.com/#org",
+            "name": "KloudKIT",
+            "url": "https://kloudkit.com/",
+            "logo": "https://kloudkit.com/logo.png",
+            "sameAs": [
+              "https://github.com/kloudkit"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "KloudKIT",
+            "url": "https://kloudkit.com/",
+            "publisher": {
+              "@id": "https://kloudkit.com/#org"
+            }
+          },
+          {
+            "@type": "ItemList",
+            "name": "KloudKIT tools",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Kloud Workspace",
+                "url": "https://ws.kloudkit.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "TestShed",
+                "url": "https://testshed.kloudkit.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Looking Glass",
+                "url": "https://lookingglass.kloudkit.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "Portico",
+                "url": "https://portico.kloudkit.com/"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
+    <link rel="preload" href="/fonts/nunito-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts.css" />
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/main.js" defer></script>
+  </head>
+
+  <body>
+    <!-- One segment per tool, in each tool's lead colour. -->
+    <div class="topbar" aria-hidden="true"></div>
+    <div class="backdrop" aria-hidden="true"></div>
+
+    <main class="stage">
+      <!-- KloudKIT itself, as a panel: the four tools' colours run down its right edge. -->
+      <a class="masthead" href="https://github.com/kloudkit" rel="noopener">
+        <span class="brand">
+          <img class="mark" src="/logo.svg" alt="" width="460" height="460" decoding="async" />
+
+          <span>
+            <h1 class="wordmark">Kloud<span>KIT</span></h1>
+            <span class="tagline">Your KIT to the cloud</span>
+            <span class="masthead__about">
+              <span>Open-source tools that take the friction out of everyday development.</span>
+              <span>Kloud Workspace leads the way: a complete dev environment, ready the moment it starts.</span>
+              <span>Smaller tools speed up testing, debugging and local services.</span>
+            </span>
+          </span>
+        </span>
+
+        <span class="masthead__link">GitHub <span aria-hidden="true">↗</span></span>
+      </a>
+
+      <!-- One panel per tool, each in its own logo's colours. The name's link covers the whole card. -->
+      <section class="tools" aria-label="Tools">
+        <article id="workspace" class="tool tool--workspace">
+          <img class="tool__icon" src="/tools/workspace.svg" alt="" width="80" height="80" />
+          <h2 class="tool__name"><a class="tool__main" href="https://ws.kloudkit.com" rel="noopener">Kloud Workspace</a></h2>
+          <span class="tool__tagline">Configured development</span>
+          <span class="tool__links">
+            <a href="https://ws.kloudkit.com" rel="noopener">Docs <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/kloudkit/workspace" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+          </span>
+        </article>
+
+        <article id="testshed" class="tool tool--testshed">
+          <img class="tool__icon" src="/tools/testshed.svg" alt="" width="80" height="80" />
+          <h2 class="tool__name"><a class="tool__main" href="https://testshed.kloudkit.com" rel="noopener">TestShed</a></h2>
+          <span class="tool__tagline">The support crew for your test bench</span>
+          <span class="tool__links">
+            <a href="https://testshed.kloudkit.com" rel="noopener">Docs <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/kloudkit/testshed" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+          </span>
+        </article>
+
+        <article id="looking-glass" class="tool tool--looking-glass">
+          <img class="tool__icon" src="/tools/looking-glass.svg" alt="" width="80" height="80" />
+          <h2 class="tool__name"><a class="tool__main" href="https://lookingglass.kloudkit.com" rel="noopener">Looking Glass</a></h2>
+          <span class="tool__tagline">See exactly what is hitting your service</span>
+          <span class="tool__links">
+            <a href="https://lookingglass.kloudkit.com" rel="noopener">Docs <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/kloudkit/looking-glass" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+          </span>
+        </article>
+
+        <article id="portico" class="tool tool--portico">
+          <img class="tool__icon" src="/tools/portico.svg" alt="" width="80" height="80" />
+          <h2 class="tool__name"><a class="tool__main" href="https://portico.kloudkit.com" rel="noopener">Portico</a></h2>
+          <span class="tool__tagline">Many services, one front door</span>
+          <span class="tool__links">
+            <a href="https://portico.kloudkit.com" rel="noopener">Docs <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/kloudkit/portico" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+          </span>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>&copy; <span id="year">2026</span> KloudKIT</span>
+    </footer>
+  </body>
+</html>
