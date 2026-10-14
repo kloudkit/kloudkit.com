@@ -6,9 +6,10 @@ import { join } from 'node:path'
 const out = 'dist/landing'
 
 // Brand files served from the site root, by the URLs pages and other sites already use.
+// The avatar is the favicon too (kloudkit-favicon.ico wraps kloudkit-avatar.png).
 const brand = {
   'favicon.ico': 'kloudkit-favicon.ico',
-  'favicon.svg': 'kloudkit-favicon.svg',
+  'favicon.svg': 'kloudkit-avatar.svg',
   'logo.svg': 'kloudkit-avatar.svg',
   'logo.png': 'kloudkit-avatar.png',
   'og.png': 'kloudkit-social.png',
@@ -51,3 +52,4 @@ for (const [pkg, family, weight] of fonts) {
 await writeFile(join(out, 'fonts.css'), faces.join('\n\n') + '\n')
 
 console.log(`landing → ${out}`)
+
